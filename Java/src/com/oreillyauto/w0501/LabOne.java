@@ -19,17 +19,12 @@ public class LabOne {
         // global instance of the class PayRoll
         Payroll payroll = new Payroll();
         
-        // Main class
-        public static void main(String args[]) {
-            
-            new LabOne();
-        }
+        // global List used to hold OreillyEmployee objects
+        List<OreillyEmployee> employeeList = new ArrayList<OreillyEmployee>();
 
         public LabOne() {
             OreillyEmployee employeeOne = new OreillyEmployee(1, 30, "Jeffery Brannon", new BigDecimal("40000.00"), "Supervisor");
             OreillyEmployee employeeTwo = new OreillyEmployee(1, 30, "Nick Jaross", new BigDecimal("40000.00"), "Manager");
-            
-            List<OreillyEmployee> employeeList = new ArrayList<OreillyEmployee>();
             
             employeeList.add(employeeOne);
             employeeList.add(employeeTwo);
@@ -38,8 +33,8 @@ public class LabOne {
             System.out.println("Manager Payroll: " + payroll.calculatePayroll(employeeList, "Manager"));
     
             System.out.println("Giving A $500 raise to each employee...");
-            giveAnnualRaiseForDepartment(new BigDecimal("500.00"), employeeList);
-            // giveAnnualRaiseForDepartment(new BigDecimal("500.00"));
+            //giveAnnualRaiseForDepartment(new BigDecimal("500.00"), employeeList);
+            giveAnnualRaiseForDepartment(new BigDecimal("500.00"));
     
             System.out.println("Total Payroll: " + payroll.calculatePayroll(employeeList));
             System.out.println("Manager Payroll: " + payroll.calculatePayroll(employeeList, "Manager"));
@@ -73,10 +68,32 @@ public class LabOne {
             payroll.calculatePayroll(employeeList, title);
         }
         
-        // This method calls the giveAnnualRaiseForDepartment method within Payroll
-        private void giveAnnualRaiseForDepartment(BigDecimal bigDecimal, List<OreillyEmployee> employeeList) {
+        // This method call the giveRaises method within Payroll
+        private void giveAnnualRaiseForDepartment(BigDecimal raiseAmount) {
             
-            payroll.giveRasises(bigDecimal, employeeList);
+            payroll.giveRasises(raiseAmount, employeeList);
+        }
+        
+        // Main class
+        public static void main(String args[]) {
+            
+            new LabOne();
         }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
