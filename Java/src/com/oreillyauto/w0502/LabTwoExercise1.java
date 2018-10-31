@@ -37,7 +37,7 @@ public class LabTwoExercise1 {
         
         System.out.println("Sum of digits (12345): " + sumOfDigits(12345));
         
-        System.out.println("Chess Board: " + buildChessBoard());
+        System.out.println("\nChess Board:\n" + generateFirstRow() + buildChessBoard());
     }
 
     /**
@@ -57,7 +57,8 @@ public class LabTwoExercise1 {
     // 7 WR WN WB WK WQ WB WN WR
     private String buildChessBoard() {
         StringBuilder sb = new StringBuilder();
-
+        
+        // Creating a map and adding to it
         Map<Point, ChessPiece> chessMap = new HashMap<Point, ChessPiece>();
         chessMap.put(new Point(0,0), new ChessPiece(ChessPiece.TYPE_ROOK, ChessPiece.COLOR_BLACK));
         chessMap.put(new Point(0,1), new ChessPiece(ChessPiece.TYPE_KNIGHT, ChessPiece.COLOR_BLACK));
@@ -76,16 +77,52 @@ public class LabTwoExercise1 {
         chessMap.put(new Point(1,6), new ChessPiece(ChessPiece.TYPE_PAWN, ChessPiece.COLOR_BLACK));
         chessMap.put(new Point(1,7), new ChessPiece(ChessPiece.TYPE_PAWN, ChessPiece.COLOR_BLACK));
         
+        chessMap.put(new Point(7,0), new ChessPiece(ChessPiece.TYPE_ROOK, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(7,1), new ChessPiece(ChessPiece.TYPE_KNIGHT, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(7,2), new ChessPiece(ChessPiece.TYPE_BISHOP, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(7,3), new ChessPiece(ChessPiece.TYPE_KING, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(7,4), new ChessPiece(ChessPiece.TYPE_QUEEN, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(7,5), new ChessPiece(ChessPiece.TYPE_BISHOP, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(7,6), new ChessPiece(ChessPiece.TYPE_KNIGHT, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(7,7), new ChessPiece(ChessPiece.TYPE_ROOK, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(6,0), new ChessPiece(ChessPiece.TYPE_PAWN, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(6,1), new ChessPiece(ChessPiece.TYPE_PAWN, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(6,2), new ChessPiece(ChessPiece.TYPE_PAWN, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(6,3), new ChessPiece(ChessPiece.TYPE_PAWN, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(6,4), new ChessPiece(ChessPiece.TYPE_PAWN, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(6,5), new ChessPiece(ChessPiece.TYPE_PAWN, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(6,6), new ChessPiece(ChessPiece.TYPE_PAWN, ChessPiece.COLOR_WHITE));
+        chessMap.put(new Point(6,7), new ChessPiece(ChessPiece.TYPE_PAWN, ChessPiece.COLOR_WHITE));
         
-        Iterator<Entry<Point, ChessPiece>> mapIterator = chessMap.entrySet().iterator();
-        while (mapIterator.hasNext()) {
-            Map.Entry<Point, ChessPiece> pair = (Map.Entry<Point, ChessPiece>) mapIterator.next();
-            System.out.print(((ChessPiece)pair.getValue()).getAbbreviation() + "  ");
-            //mapIterator.remove();
+        // Creates the chess board using a nested loop
+        for(int k = 0; k < 8; k++) { 
+            sb.append("\n");
+            sb.append(k + " ");
+            for(int i = 0; i < 8; i++) {
+                ChessPiece piece = chessMap.get(new Point(k, i));
+                if (piece != null) {
+                    sb.append(" " + piece);
+                } else {
+                    sb.append(" --");
+                }
+            }
+        }
+        return sb.toString();
+    }
+    
+    // This is used to generate the first row for the chess board
+    private String generateFirstRow() {
+        StringBuilder sb = new StringBuilder();
+        
+        // Used to create the first row of numbers
+        for (int i = -1; i < 8; i++) {
+            if (i == -1) {
+                sb.append("    ");
+            } else {
+                sb.append(i + "  ");
+            } 
         }
         
-        ChessPiece piece = chessMap.get(new Point(0, 0));
-        System.out.println("Piece equals " + piece);
         return sb.toString();
     }
 
