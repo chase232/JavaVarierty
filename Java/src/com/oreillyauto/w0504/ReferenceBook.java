@@ -37,8 +37,8 @@ public class ReferenceBook extends LibraryBook implements Comparable<LibraryBook
     // toString
     @Override
     public String toString() {
-        return "ReferenceBook [getCallNumber()=" + getCallNumber() + ", getAuthor()=" + getAuthor() + ", getTitle()=" + getTitle()
-                + ", getIsbn()=" + getIsbn() + "]";
+        return "ReferenceBook => Call Number: " + getCallNumber() + ", Author: " + getAuthor() + ", Title: " + getTitle()
+                + ", ISBNL: " + getIsbn();
     }
     
     // Methods

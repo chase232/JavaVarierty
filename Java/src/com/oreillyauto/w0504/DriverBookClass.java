@@ -8,12 +8,14 @@ public class DriverBookClass {
 
     public DriverBookClass() {
         
-        LinkedList<Book> myBookList = new LinkedList<>();
-        myBookList.add(new Book("James", "Scary Book", "1234"));
-        myBookList.add(new Book("Samson", "Tall Tales", "4568"));
-        myBookList.add(new Book("Harrison", "Parry Hotter", "8633"));
-        myBookList.add(new Book("Greg", "Good Story Bro", "0025"));
-        myBookList.add(new Book("Lebron", "O'Reilly", "7777"));
+        LinkedList<LibraryBook> myBookList = new LinkedList<>();
+        
+        System.out.println("Printing Library");
+        myBookList.add(new ReferenceBook("James", "Scary Book", "1234AEG", "94", "Collection"));
+        myBookList.add(new ReferenceBook("Sameson", "Tall Tales", "4568GYW", "28", "Collection"));
+        myBookList.add(new ReferenceBook("Harrison", "Wise Tales", "7488XIK", "189", "Collection"));
+        myBookList.add(new CirculatingBook("Rowling", "Harry Potter", "8541UHT", "7"));
+        myBookList.add(new CirculatingBook("Johnson", "Ocho Cinco", "9856OCH", "87"));
         
         for (Book book : myBookList) {
             System.out.println(book.toString());

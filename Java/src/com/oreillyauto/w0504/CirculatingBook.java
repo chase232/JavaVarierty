@@ -45,8 +45,8 @@ public class CirculatingBook extends LibraryBook implements Comparable<LibraryBo
 
     @Override
     public String toString() {
-        return "CirculatingBook [getCallNumber()=" + getCallNumber() + ", getAuthor()=" + getAuthor() + ", getTitle()=" + getTitle()
-                + ", getIsbn()=" + getIsbn() + "]";
+        return "CirculatingBook => Call Number: " + getCallNumber() + ", Author: " + getAuthor() + ", Title: " + getTitle()
+                + ", ISBN: " + getIsbn();
     }
 
     public void checkout(String patron, String dueDate) {
