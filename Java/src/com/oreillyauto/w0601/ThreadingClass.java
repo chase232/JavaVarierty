@@ -56,7 +56,7 @@ public class ThreadingClass extends Thread {
         int aLength = array.length;
 
         // finding the smallest and largest number
-/*        int minNum = array[0];
+        int minNum = array[0];
         int maxNum = array[0];
         for (int i = 1; i < aLength; i++) {
             if (array[i] < minNum) {
@@ -64,15 +64,15 @@ public class ThreadingClass extends Thread {
             } else if (array[i] > maxNum) {
                 maxNum = array[i];
             }
-        }*/
+        }
 
         // creating an array of the frequencies
         // array count is used to hold the number of frequencies
-        int[] count = new int[9999];
+        int[] count = new int[maxNum - minNum + 1];
 
         // for loop used to find the frequencies
         for (int i = 0; i < aLength; i++) {
-            count[array[i] - 1] = count[array[i] - 1] + 1;
+            count[array[i] - minNum] = count[array[i] - minNum] + 1;
         }
         count[0] = count[0] - 1;
 
