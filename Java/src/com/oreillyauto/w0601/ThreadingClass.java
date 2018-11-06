@@ -2,15 +2,9 @@ package com.oreillyauto.w0601;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
@@ -40,10 +34,7 @@ public class ThreadingClass extends Thread {
                     }
                 }                
                 int[] array = Stream.of(sb.toString().split(",")).mapToInt(Integer::parseInt).toArray();
-                //array = counterSort(array);         
-                //List<Integer> sortedList = Arrays.stream(array).boxed().collect(Collectors.toList());
-                //FileUtils.writeStringToFile(outputfile, sortedList.toString());
-                FileUtils.writeStringToFile(outputfile, Arrays.toString(counterSort(array)));
+                FileUtils.writeStringToFile(outputfile, Arrays.toString(counterSort(array)));          
             }
             finally {
                 try {
@@ -65,7 +56,7 @@ public class ThreadingClass extends Thread {
         int aLength = array.length;
 
         // finding the smallest and largest number
-        int minNum = array[0];
+/*        int minNum = array[0];
         int maxNum = array[0];
         for (int i = 1; i < aLength; i++) {
             if (array[i] < minNum) {
@@ -73,15 +64,15 @@ public class ThreadingClass extends Thread {
             } else if (array[i] > maxNum) {
                 maxNum = array[i];
             }
-        }
+        }*/
 
         // creating an array of the frequencies
         // array count is used to hold the number of frequencies
-        int[] count = new int[maxNum - minNum + 1];
+        int[] count = new int[9999];
 
         // for loop used to find the frequencies
         for (int i = 0; i < aLength; i++) {
-            count[array[i] - minNum] = count[array[i] - minNum] + 1;
+            count[array[i] - 1] = count[array[i] - 1] + 1;
         }
         count[0] = count[0] - 1;
 
@@ -93,8 +84,9 @@ public class ThreadingClass extends Thread {
 
         // Sorting the array
         for (int i = aLength - 1; i >= 0; i--) {
-            sortedArray[count[array[i] - minNum]--] = array[i];
+            sortedArray[count[array[i] - 1]--] = array[i];
         }
         return sortedArray;
     }
+    
 }

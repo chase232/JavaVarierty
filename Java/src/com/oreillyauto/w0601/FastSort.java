@@ -16,7 +16,18 @@ public class FastSort {
             System.out.println("Process started.");
             cleanup(new File[]{sorted1, sorted2, sorted3});
             long start = System.currentTimeMillis();
-            processFiles();
+            //processFiles();
+            Thread thread1 = new ThreadingClass(file1);
+            thread1.start();
+            thread1.join();
+            
+            Thread thread2 = new ThreadingClass(file2);
+            thread2.start();
+            thread2.join();
+            
+            Thread thread3 = new ThreadingClass(file3);
+            thread3.start();
+            thread3.join();
             long end = System.currentTimeMillis();
             System.out.println("Process Time: " + (end - start) + " milliseconds");
             System.out.println("Done.");
@@ -36,7 +47,7 @@ public class FastSort {
 
     private void processFiles() throws Exception {
         
-        Thread thread1 = new ThreadingClass(file1);
+/*        Thread thread1 = new ThreadingClass(file1);
         thread1.start();
         thread1.join();
         
@@ -46,7 +57,7 @@ public class FastSort {
         
         Thread thread3 = new ThreadingClass(file3);
         thread3.start();
-        thread3.join();
+        thread3.join();*/
         
         
     } 
