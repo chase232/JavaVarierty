@@ -4,12 +4,14 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
 
@@ -27,50 +29,71 @@ public class ThreadingClass extends Thread {
             String path = file.getAbsolutePath().replace(".txt", ".sorted.txt");
             File outputfile = new File(path);
             PrintWriter fileOut = new PrintWriter(path);
-            FileOutputStream out = new FileOutputStream(outputfile);
 
             try {
                 // Read the file
-                //List<String> lineList = new ArrayList<String>();
                 StringBuilder sb = new StringBuilder();
-
                 try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                     String line;
                     while ((line = br.readLine()) != null) {
-                        sb.append(line + "\n");
+                        sb.append(line + ",");
                     }
-                }
-
-                // Sort the Data
-                String values = sb.toString();
-                Collections.sort(Arrays.asList(values));
-
-                // Create test data (remove this code)
-                //List<String> data = new ArrayList<String>();
-                
-                //String sortedValues = String.join(sb);
-                String sortedValues = sb.toString();
-                
-                System.out.println("Writing to path: " + path);
-                //FileUtils.writeStringToFile(new File(path), sortedValues);
-                //FileUtils.writeByteArrayToFile(outputfile, sortedValues.getBytes());
-                FileUtils.writeStringToFile(new File(path), sortedValues);
-                
-                // Write to file
-/*                for (String str : data) {
-                    out.write(str.getBytes());
-                }*/
+                }                
+                int[] array = Stream.of(sb.toString().split(",")).mapToInt(Integer::parseInt).toArray();
+                array = counterSort(array);         
+                List<Integer> sortedList = Arrays.stream(array).boxed().collect(Collectors.toList());
+                FileUtils.writeStringToFile(outputfile, sortedList.toString());
             }
             finally {
                 try {
                     fileOut.close();
                 }
-                catch (Exception e) {/* do nothing */}
+                catch (Exception e) {/* do nothing*/ }
             }
         }
         catch (Exception e) {
             // Throwing an exception
             System.out.println("Exception is caught");
         }
+    }
+
+    public int[] counterSort(int[] array) {
+
+        // setting sortedArray to have the same number of values as the passed array
+        int[] sortedArray = new int[array.length];
+        int aLength = array.length;
+
+        // finding the smallest and largest number
+        int minNum = array[0];
+        int maxNum = array[0];
+        for (int i = 1; i < aLength; i++) {
+            if (array[i] < minNum) {
+                minNum = array[i];
+            } else if (array[i] > maxNum) {
+                maxNum = array[i];
+            }
+        }
+
+        // creating an array of the frequencies
+        // array count is used to hold the number of frequencies
+        int[] count = new int[maxNum - minNum + 1];
+
+        // for loop used to find the frequencies
+        for (int i = 0; i < aLength; i++) {
+            count[array[i] - minNum] = count[array[i] - minNum] + 1;
+        }
+        count[0] = count[0] - 1;
+
+        // looping through count array 
+        int cLength = count.length;
+        for (int i = 1; i < cLength; i++) {
+            count[i] = count[i] + count[i - 1];
+        }
+
+        // Sorting the array
+        for (int i = aLength - 1; i >= 0; i--) {
+            sortedArray[count[array[i] - minNum]--] = array[i];
+        }
+        return sortedArray;
     }
 }

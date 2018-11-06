@@ -32,14 +32,6 @@ public class FastSort {
                 file.delete();
             }
         }
-        
-        try {
-            Thread.sleep(1000);
-        }
-        catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
     private void processFiles() throws Exception {
@@ -56,7 +48,7 @@ public class FastSort {
         thread3.start();
         thread3.join();
         
-
+        
     } 
     
     public static void main(String[] args) {
