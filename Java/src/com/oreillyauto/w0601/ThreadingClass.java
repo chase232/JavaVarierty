@@ -40,9 +40,10 @@ public class ThreadingClass extends Thread {
                     }
                 }                
                 int[] array = Stream.of(sb.toString().split(",")).mapToInt(Integer::parseInt).toArray();
-                array = counterSort(array);         
-                List<Integer> sortedList = Arrays.stream(array).boxed().collect(Collectors.toList());
-                FileUtils.writeStringToFile(outputfile, sortedList.toString());
+                //array = counterSort(array);         
+                //List<Integer> sortedList = Arrays.stream(array).boxed().collect(Collectors.toList());
+                //FileUtils.writeStringToFile(outputfile, sortedList.toString());
+                FileUtils.writeStringToFile(outputfile, Arrays.toString(counterSort(array)));
             }
             finally {
                 try {
