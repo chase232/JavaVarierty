@@ -38,6 +38,12 @@ public class BlackJack {
         Hand playerHand = new Hand();
         
         dealerHand.addCard(deck.dealCard());
+        dealerHand.addCard(deck.dealCard());
+        
+        playerHand.addCard(deck.dealCard());
+        playerHand.addCard(deck.dealCard());
+        
+        
     }
     
     public static void main(String[] args) {
