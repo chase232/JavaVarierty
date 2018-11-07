@@ -1,13 +1,14 @@
 package com.oreillyauto.w0601;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.stream.Stream;
-
-import org.apache.commons.io.FileUtils;
 
 public class ThreadingClass extends Thread {
 
@@ -21,20 +22,26 @@ public class ThreadingClass extends Thread {
         try {
             // Declarations
             String path = file.getAbsolutePath().replace(".txt", ".sorted.txt");
-            File outputfile = new File(path);
             PrintWriter fileOut = new PrintWriter(path);
+            final String OUTPUT_FILE = path;
 
             try {
                 // Read the file
+                int[] intArray = new int[100000];
                 StringBuilder sb = new StringBuilder();
                 try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                     String line;
+                    int i = 0;
                     while ((line = br.readLine()) != null) {
-                        sb.append(line + ",");
+                        intArray[i] = Integer.parseInt(line);
+                        i++;
                     }
                 }                
-                int[] array = Stream.of(sb.toString().split(",")).mapToInt(Integer::parseInt).toArray();
-                FileUtils.writeStringToFile(outputfile, Arrays.toString(counterSort(array)));          
+                byte[] bytes = Arrays.toString(counterSort(intArray)).getBytes();
+                //byte[] bytes = Arrays.toString(counterSort(intArray)).getBytes();         
+                try (OutputStream out = new FileOutputStream(OUTPUT_FILE)) {
+                    out.write(bytes);
+                }
             }
             finally {
                 try {
@@ -89,4 +96,18 @@ public class ThreadingClass extends Thread {
         return sortedArray;
     }
     
+    static class Reader 
+    { 
+        final private int BUFFER_SIZE = 1 << 16; 
+        private DataInputStream din; 
+        private byte[] buffer; 
+        private int bufferPointer, bytesRead; 
+  
+        public Reader() 
+        { 
+            din = new DataInputStream(System.in); 
+            buffer = new byte[BUFFER_SIZE]; 
+            bufferPointer = bytesRead = 0; 
+        } 
+    }
 }
