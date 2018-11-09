@@ -5,15 +5,18 @@
 
 package com.oreillyauto.w0604;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DriverClass {
 
     public DriverClass() {
         
-        /*
-         * This is used to test an abstract class implementation 
+       
+        //This is used to test an abstract class implementation 
         ExtendsClass ec = new ExtendsClass(3, 4);        
         ec.myAbstractMethod("foo");
-        */
+        ec.myAbstractMethod("Hello");
         
         /*
          * This is used to test interfaces and geometry      
@@ -47,12 +50,38 @@ public class DriverClass {
         System.out.println("MergedList = " + mergedList.toString());
         */
             
-        String[] stringArray = {"1", "2", "3"};
+/*        String[] stringArray = {"1", "2", "3"};
         int [] intArray = new int[3];
         for (int i = 0; i < stringArray.length; i++) {
             intArray[i]= Integer.parseInt(stringArray[i]);
             System.out.println(intArray[i]);
+        }*/
+        
+        // String to numbers
+/*        String marvel = "Marvel Rocks";
+        char[] ch  = marvel.toCharArray();
+        for (char c : ch) {
+            if (c == ' ') {
+                System.out.print("#");
+            }
+            int temp = (int) c;
+            if (temp <= 122 && temp >= 97) {
+                System.out.print(temp - 96 + ".");
+            } else if (temp<=90 && temp>=65){
+                System.out.print(temp-64 + ".");
+            }
+        } */   
+        
+        // Map example
+        int[] intArray = {1, 2, 3, 4};
+        String[] stringArray = {"1", "2", "3", "4"};
+        Map<Integer, String> myMap = new HashMap<>();
+        int j = 0;
+        int k = 1;
+        for(int i = 0; i < intArray.length; i++) {
+            myMap.put(i + 1, stringArray[i]);
         }
+        System.out.println(myMap.toString());
         
     }
     

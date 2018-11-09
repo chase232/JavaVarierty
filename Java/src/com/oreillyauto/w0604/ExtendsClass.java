@@ -30,4 +30,9 @@ public class ExtendsClass extends AbstractClass{
     public void setFour(int four) {
         this.four = four;
     }
+    
+    public void myAbstractMethod(String foo) {
+        super.myAbstractMethod(foo);
+        System.out.println("Printed " + foo + " in the extended class");
+    }
 }
