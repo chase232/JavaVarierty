@@ -18,6 +18,10 @@ public class Hand {
         return hand.get(index);
     }
     
+    public int cardCount() {
+        return hand.size();
+    }
+    
     public int getHandValue() {
         
         int handValue = 0;
